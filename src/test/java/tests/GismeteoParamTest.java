@@ -2,11 +2,9 @@ package tests;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.commands.SetValue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -30,7 +28,6 @@ public class GismeteoParamTest extends TestBase {
     @Tags({@Tag("WEB"), @Tag("SMOKE")})
     @ParameterizedTest()
     void headeaButtonsTest(String headerButton, String defaultUrl) {
-        open("/");
         $$(".link").findBy(Condition.text(headerButton)).click();
         webdriver().shouldHave(url(defaultUrl));
     }
@@ -40,7 +37,6 @@ public class GismeteoParamTest extends TestBase {
     @Tag("WEB")
     @ParameterizedTest
     void searchCityTest(String searchCity) {
-        open("/");
         $(".input").setValue(searchCity);
         $$(".search-item").findBy(Condition.text(searchCity)).click();
         $(".page-title").shouldHave(Condition.text("Погода"));
@@ -58,7 +54,6 @@ public class GismeteoParamTest extends TestBase {
     @Tag("WEB")
     @ParameterizedTest()
     void breadCrumpsTest(String city, List<String> breadCrumps) {
-        open("/");
         $(".input").setValue(city);
         $$(".search-item").findBy(Condition.text(city)).click();
         $$(".breadcrumbs-links a").shouldHave(CollectionCondition.texts(breadCrumps));
